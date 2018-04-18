@@ -67,23 +67,51 @@ function shuffle(array) {
 
 
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+* set up the event listener for a card. If a card is clicked:
+*  - display the card's symbol (put this functionality in another function that you call from this one)
+*  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+*  - if the list already has another card, check to see if the two cards match
+*    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+*    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+*/
 
- let openCards = [];
+let openCards = [];
 
- function flipCard() {
-   if(this.classList.contains('open')){
+function flipCard() {
+  if(this.classList.contains('open')){
 
-   } else {
-     this.classList.add('open', 'show');
+  } else {
+    this.classList.add('open', 'show');
 
-   }
- }
+    openCards.push(this);
+
+    if(openCards.length === 2){
+
+      checkCards(openCards);
+      openCards = [];
+
+    }
+  }
+}
+
+
+function checkCards(openCards) {
+  if(openCards[0].innerHTML == openCards[1].innerHTML){
+    console.log('match');
+    openCards.forEach(function(openCard){
+      openCard.classList.add('match');
+      openCard.classList.remove('open', 'show');
+    })
+    openCards = [];
+  } else {
+    console.log('no match');
+    setTimeout(function(){
+      openCards.forEach(function(openCard){
+        openCard.classList.remove('open', 'show');
+      })
+    }, 1000);
+  }
+
+}
