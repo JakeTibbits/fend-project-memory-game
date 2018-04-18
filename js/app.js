@@ -7,7 +7,6 @@ deck.querySelectorAll('.card').forEach(function(card) {
   cards.push(card);
 });
 
-console.log(cards);
 
 
 /*
@@ -16,13 +15,20 @@ console.log(cards);
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-function refreshCards(){
-  cards = shuffle(cards);
-  console.log(cards);
+ function refreshCards(){
 
-}
+   //shuffle cards
+   cards = shuffle(cards);
 
-document.querySelector('.restart').addEventListener('click', refreshCards);
+   let newCards =
+
+   cards.forEach(function(card){
+
+   });
+
+ }
+
+ document.querySelector('.restart').addEventListener('click', refreshCards);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
