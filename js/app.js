@@ -1,8 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
+
+//get the deck
 const deck = document.querySelector('.deck');
+
+//create an empty array
 let cards = [];
+
+//populate the array with cards elements
 deck.querySelectorAll('.card').forEach(function(card) {
   cards.push(card);
 });
@@ -10,25 +16,31 @@ deck.querySelectorAll('.card').forEach(function(card) {
 
 
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
- function refreshCards(){
+* Display the cards on the page
+*   - shuffle the list of cards using the provided "shuffle" method below
+*   - loop through each card and create its HTML
+*   - add each card's HTML to the page
+*/
+function refreshCards(){
 
-   //shuffle cards
-   cards = shuffle(cards);
+  //hide the deck for to avoid reflows
+  deck.hidden = true;
 
-   let newCards =
+  //shuffle
+  cards = shuffle(cards);
 
-   cards.forEach(function(card){
+  //re-order the cards using flex order
+  let i = 0;
+  cards.forEach(function(card){
+    i++
+    card.style.order = i;
+  });
 
-   });
+  //unhide the deck to display shuffled cards
+  deck.hidden = false;
 
- }
+}
 
- document.querySelector('.restart').addEventListener('click', refreshCards);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
