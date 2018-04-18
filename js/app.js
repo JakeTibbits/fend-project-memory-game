@@ -11,7 +11,7 @@ let cards = [];
 //populate the array with cards elements
 deck.querySelectorAll('.card').forEach(function(card) {
   cards.push(card);
-  card.addEventListener('click', flipCard);
+  card.addEventListener('click', clickCard);
 });
 
 
@@ -76,10 +76,12 @@ function shuffle(array) {
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
+const movesSpan = document.querySelector('.moves');
 
+let movesCounter = 0;
 let openCards = [];
 
-function flipCard() {
+function clickCard() {
   if(this.classList.contains('open')){
 
   } else {
@@ -88,10 +90,11 @@ function flipCard() {
     openCards.push(this);
 
     if(openCards.length === 2){
+      movesCounter++;
+      movesSpan.innerText = movesCounter;
 
-      checkCards(openCards);
+      checkCards(openCards)
       openCards = [];
-
     }
   }
 }
@@ -99,19 +102,20 @@ function flipCard() {
 
 function checkCards(openCards) {
   if(openCards[0].innerHTML == openCards[1].innerHTML){
-    console.log('match');
+    //console.log('match');
     openCards.forEach(function(openCard){
       openCard.classList.add('match');
       openCard.classList.remove('open', 'show');
     })
-    openCards = [];
+
+    return true;
   } else {
-    console.log('no match');
+    //console.log('no match');
     setTimeout(function(){
       openCards.forEach(function(openCard){
         openCard.classList.remove('open', 'show');
       })
     }, 1000);
+    return false;
   }
-
 }
