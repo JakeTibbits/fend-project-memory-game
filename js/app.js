@@ -42,6 +42,13 @@ function refreshCards(){
 }
 
 
+//refresh cards every time the page is loaded so that the order is always different
+document.addEventListener("DOMContentLoaded", refreshCards);
+
+//refresh cards when restart button is clicked
+document.querySelector('.restart').addEventListener('click', refreshCards);
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
