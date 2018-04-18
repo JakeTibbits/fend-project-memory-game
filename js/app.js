@@ -5,12 +5,13 @@
 //get the deck
 const deck = document.querySelector('.deck');
 
-//create an empty array
+//create an empty array to hold all cards
 let cards = [];
 
 //populate the array with cards elements
 deck.querySelectorAll('.card').forEach(function(card) {
   cards.push(card);
+  card.addEventListener('click', flipCard);
 });
 
 
@@ -75,3 +76,11 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+function flipCard() {
+  if(this.classList.contains('open')){
+
+  } else {
+    this.classList.add('open', 'show');
+  }
+}
