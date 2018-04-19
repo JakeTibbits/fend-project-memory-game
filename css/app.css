@@ -62,14 +62,14 @@ h1 {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 0 0 3em; }
+  margin: 0 0 3em;
+  -webkit-perspective: 1000px;
+  perspective: 1000px; }
   .deck .card {
     height: 125px;
     width: 125px;
-    background: #2e3d49;
-    font-size: 0;
+    font-size: 48px;
     color: #ffffff;
-    border-radius: 8px;
     cursor: pointer;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -80,21 +80,89 @@ h1 {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    border-radius: 8px;
     -webkit-box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5); }
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    -webkit-transition: -webkit-transform 500ms ease-in-out;
+    transition: -webkit-transform 500ms ease-in-out;
+    -o-transition: transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out;
+    transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    position: relative; }
     .deck .card.open {
       -webkit-transform: rotateY(0);
       transform: rotateY(0);
+      cursor: default;
+      pointer-events: none; }
+    .deck .card .front,
+    .deck .card .back {
+      border-radius: 8px;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      position: absolute;
+      top: 0;
+      left: 0; }
+    .deck .card .front {
+      z-index: 2;
       background: #02b3e4;
-      cursor: default;
-      pointer-events: none; }
-    .deck .card.show {
-      font-size: 33px; }
+      -webkit-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+      -webkit-transition: background-color 300ms ease-in-out;
+      -o-transition: background-color 300ms ease-in-out;
+      transition: background-color 300ms ease-in-out;
+      -webkit-transition-delay: 1200ms;
+      -o-transition-delay: 1200ms;
+      transition-delay: 1200ms;
+      text-align: center; }
+      .deck .card .front .fa {
+        position: relative;
+        margin-top: 50%;
+        top: -24px; }
+    .deck .card .back {
+      background: #2e3d49;
+      -webkit-transform: rotateY(180deg);
+      transform: rotateY(180deg); }
     .deck .card.match {
+      -webkit-transform: rotateY(0);
+      transform: rotateY(0);
       cursor: default;
-      background: #02ccba;
-      font-size: 33px;
-      pointer-events: none; }
+      pointer-events: none;
+      -webkit-animation: match 800ms cubic-bezier(0.52, 0.09, 0.53, 1.51);
+      animation: match 800ms cubic-bezier(0.52, 0.09, 0.53, 1.51);
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+      -webkit-animation-delay: 500ms;
+      animation-delay: 500ms; }
+      .deck .card.match .front {
+        background-color: gold; }
+
+@-webkit-keyframes match {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes match {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
 
 /*
  * Styles for the Score Panel
