@@ -111,6 +111,36 @@ h1 {
     .score-panel .stars li {
       list-style: none;
       display: inline-block; }
+      .score-panel .stars li.hidden {
+        will-change: transform opacity;
+        -webkit-animation: popOut 500ms ease-in-out;
+        animation: popOut 500ms ease-in-out;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards; }
   .score-panel .restart {
     float: right;
     cursor: pointer; }
+
+@-webkit-keyframes popOut {
+  20% {
+    opacity: 1;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2); }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0); } }
+
+@keyframes popOut {
+  20% {
+    opacity: 1;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2); }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0); } }

@@ -93,7 +93,23 @@ h1
     li
       list-style: none
       display: inline-block
-      
+      &.hidden
+        will-change: transform opacity
+        animation: popOut 500ms ease-in-out
+        animation-fill-mode: forwards
+
+
   .restart
     float: right
     cursor: pointer
+
+
+@keyframes popOut
+  20%
+    opacity: 1
+    transform: scale(1.2)
+  50%
+    opacity: 1
+  100%
+    opacity: 0
+    transform: scale(0)
