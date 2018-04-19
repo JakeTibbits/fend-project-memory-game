@@ -13,7 +13,7 @@
   <div class="container">
 
     <header>
-      <h1>Matching Game</h1>
+      <h1>Super Matchy Funtime Remembergame</h1>
     </header>
 
     <section class="score-panel">
@@ -23,7 +23,7 @@
     		<li><i class="fa fa-star"></i></li>
     	</ul>
 
-    	<span class="moves">0</span> Moves
+    	<span class="move-counter"><span class="moves">0</span> Moves</span>
 
       <button class="restart">
   		  <i class="fa fa-repeat"></i>
@@ -97,8 +97,8 @@
       </li>
     </ul>
 
-    <div class="modal">
-      <button class="exit">x</button>
+    <dialog class="modal" open>
+      <button class="exit">&times;</button>
       <h2>You win!</h2>
       <ul class="stars">
     		<li><i class="fa fa-star"></i></li>
@@ -107,7 +107,7 @@
     	</ul>
       <p>Your time: <span class="timer"></span></p>
       <button class="restart"><i class="fa fa-repeat"></i>Play again</button>
-    </div>
+    </dialog>
 
   </div>
 

@@ -16,7 +16,9 @@ body {
   padding: 0; }
 
 body {
-  background: #ffffff url("../img/geometry2.png");
+  background-image: url("../img/sky-clouds-moon-horizon.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: 'Coda', cursive; }
 
 .container {
@@ -35,8 +37,12 @@ body {
   flex-direction: column; }
 
 h1 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 300; }
+  font-family: 'Coda', cursive;
+  font-weight: 300;
+  font-size: 28px;
+  padding: 10px 15px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 8px; }
 
 /*
  * Styles for the deck of cards
@@ -44,13 +50,12 @@ h1 {
 .deck {
   width: 660px;
   min-height: 680px;
-  background: -webkit-linear-gradient(290deg, #02ccba 0%, #aa7ecd 100%);
-  background: -o-linear-gradient(290deg, #02ccba 0%, #aa7ecd 100%);
-  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  background: rgba(255, 255, 255, 0.4);
   padding: 32px;
   border-radius: 10px;
-  -webkit-box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+  border: 1px solid grey;
+  -webkit-box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,7 +69,8 @@ h1 {
   align-items: center;
   margin: 0 0 3em;
   -webkit-perspective: 1000px;
-  perspective: 1000px; }
+  perspective: 1000px;
+  z-index: 1; }
   .deck .card {
     height: 125px;
     width: 125px;
@@ -170,24 +176,47 @@ h1 {
 .score-panel {
   text-align: left;
   width: 345px;
-  margin-bottom: 10px; }
-  .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0; }
-    .score-panel .stars li {
-      list-style: none;
-      display: inline-block; }
-      .score-panel .stars li.hidden {
-        will-change: transform opacity;
-        -webkit-animation: popOut 500ms ease-in-out;
-        animation: popOut 500ms ease-in-out;
-        -webkit-animation-fill-mode: forwards;
-        animation-fill-mode: forwards; }
-  .score-panel .restart {
-    float: right;
-    cursor: pointer; }
+  margin-bottom: 10px;
+  font-size: 28px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 8px 8px 0 0;
+  border: 1px solid grey;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 10px 15px;
+  margin-bottom: 0;
+  position: relative;
+  top: 1px;
+  z-index: 2; }
+
+.restart {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  font-size: 28px; }
+
+.stars {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  margin: 0 5px 0 0; }
+  .stars li {
+    list-style: none;
+    display: inline-block; }
+    .stars li.hidden {
+      will-change: transform opacity;
+      -webkit-animation: popOut 500ms ease-in-out;
+      animation: popOut 500ms ease-in-out;
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards; }
 
 @-webkit-keyframes popOut {
   20% {
@@ -212,3 +241,41 @@ h1 {
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0); } }
+
+.modal {
+  position: absolute;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid grey;
+  text-align: center;
+  -webkit-box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
+  z-index: 3; }
+  .modal .exit {
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    border-radius: 8px;
+    background-color: #f00;
+    font-size: 28px;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    line-height: 20px;
+    border: 1px solid grey;
+    padding: 0;
+    margin: 0; }
+  .modal h2 {
+    font-family: 'Coda', cursive;
+    font-size: 28px;
+    font-weight: 300; }
+  .modal .stars {
+    font-size: 48px;
+    color: gold; }
+  .modal .restart {
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 8px; }
+    .modal .restart i {
+      margin-right: 10px; }

@@ -17,7 +17,10 @@ body
 
 
 body
-  background: #ffffff url('../img/geometry2.png') /* Background pattern from Subtle Patterns */
+  background:
+    image: url('../img/sky-clouds-moon-horizon.jpg')
+    repeat: no-repeat
+    size: cover
   font-family: 'Coda', cursive
 
 
@@ -29,8 +32,12 @@ body
 
 
 h1
-  font-family: 'Open Sans', sans-serif
+  font-family: 'Coda', cursive
   font-weight: 300
+  font-size: 28px
+  padding: 10px 15px
+  background-color: rgba(255,255,255,0.4)
+  border-radius: 8px
 
 
 /*
@@ -40,16 +47,18 @@ h1
 .deck
   width: 660px
   min-height: 680px
-  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%)
+  background: rgba(255,255,255,0.4)
   padding: 32px
   border-radius: 10px
-  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5)
+  border: 1px solid grey
+  box-shadow: 0 18px 15px 15px rgba(0,0,0,0.2)
   display: flex
   flex-wrap: wrap
   justify-content: space-between
   align-items: center
   margin: 0 0 3em
   perspective: 1000px
+  z-index: 1
 
   .card
     height: 125px
@@ -118,25 +127,44 @@ h1
   text-align: left
   width: 345px
   margin-bottom: 10px
+  font-size: 28px
+  display: flex
+  justify-content: space-between
+  background: rgba(255,255,255,0.4)
+  border-radius: 8px 8px 0 0
+  border: 1px solid grey
+  border-bottom: 1px solid rgba(255,255,255,0.8)
+  padding: 10px 15px
+  margin-bottom: 0
+  position: relative
+  top: 1px
+  z-index: 2
 
-  .stars
-    margin: 0
-    padding: 0
+.restart
+  cursor: pointer
+  appearance: none
+  background-color: transparent
+  border: 0
+  font-size: 28px
+
+.stars
+  margin: 0
+  padding: 0
+  display: inline-block
+  margin: 0 5px 0 0
+
+
+  li
+    list-style: none
     display: inline-block
-    margin: 0 5px 0 0
 
-    li
-      list-style: none
-      display: inline-block
-      &.hidden
-        will-change: transform opacity
-        animation: popOut 500ms ease-in-out
-        animation-fill-mode: forwards
+    &.hidden
+      will-change: transform opacity
+      animation: popOut 500ms ease-in-out
+      animation-fill-mode: forwards
 
 
-  .restart
-    float: right
-    cursor: pointer
+
 
 
 @keyframes popOut
@@ -148,3 +176,42 @@ h1
   100%
     opacity: 0
     transform: scale(0)
+
+
+.modal
+  //display: none
+  position: absolute
+  padding: 20px
+  border-radius: 8px
+  border: 1px solid grey
+  text-align: center
+  box-shadow: 0 18px 15px 15px rgba(0,0,0,0.2)
+  z-index: 3
+  .exit
+    position: absolute
+    right: -7px
+    top: -7px
+    border-radius: 8px
+    background-color: #f00
+    font-size: 28px
+    color: #fff
+    width: 32px
+    height: 32px
+    text-align: center
+    line-height: 20px
+    border: 1px solid grey
+    padding: 0
+    margin: 0
+  h2
+    font-family: 'Coda', cursive
+    font-size: 28px
+    font-weight: 300
+  .stars
+    font-size: 48px
+    color: gold
+  .restart
+    font-size: 18px
+    padding: 10px 15px
+    border-radius: 8px
+    i
+      margin-right: 10px
