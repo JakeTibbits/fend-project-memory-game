@@ -130,7 +130,7 @@ function unFlipCards(){
       //re-endable clicking
       deck.style.pointerEvents = "auto";
     })
-  }, 1500);
+  }, 1200);
 
 }
 
@@ -173,7 +173,7 @@ function incrementCounter(reset){
     movesCounter++;
     if(movesCounter == 12){
       allStars[0].classList.add('hidden');
-    } else if (movesCounter == 24){
+    } else if (movesCounter == 20){
       allStars[1].classList.add('hidden');
     }
   }
