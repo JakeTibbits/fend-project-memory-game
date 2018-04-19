@@ -152,19 +152,37 @@ function matchCards(){
 
 //function to increment or reset the movesCounter
 function incrementCounter(reset){
+  //define variables for outputting score to DOM
+  const scorePanel = document.querySelector('.score-panel');
+  const movesSpan = scorePanel.querySelector('.moves');
+  const allStars = scorePanel.querySelectorAll('.stars li');
+
+  //hide scorePanel to avoid reflows
+  scorePanel.hidden = true;
 
   //check if counter is to be increased or reset
   if (reset){
     //reset counter
     movesCounter = 0
+    //reset stars
+    allStars.forEach(function(star){
+      star.classList= "";
+    });
   } else {
     //increment counter
     movesCounter++;
+    if(movesCounter == 12){
+      allStars[0].classList.add('hidden');
+    } else if (movesCounter == 24){
+      allStars[1].classList.add('hidden');
+    }
   }
-  //output new counter value to DOM
-  const movesSpan = document.querySelector('.moves');
+
+  //update moves total
   movesSpan.innerText = movesCounter;
 
+  //unhide scorePanel to after changes made
+  scorePanel.hidden = false;
 
 }
 
