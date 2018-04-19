@@ -76,46 +76,57 @@ function shuffle(array) {
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
-const movesSpan = document.querySelector('.moves');
+
+
+
 
 let movesCounter = 0;
 let openCards = [];
 
 function clickCard() {
-  if(this.classList.contains('open')){
+  if(!(this.classList.contains('open') || this.classList.contains('match'))){
 
-  } else {
-    this.classList.add('open', 'show');
+    flipCard(this);
+    checkCards()
+    console.log(openCards);
 
-    openCards.push(this);
-
-    if(openCards.length === 2){
-      movesCounter++;
-      movesSpan.innerText = movesCounter;
-
-      checkCards(openCards)
-      openCards = [];
-    }
   }
 }
 
+function flipCard(card){
+  card.classList.add('open', 'show');
+  openCards.push(card);
+}
 
-function checkCards(openCards) {
-  if(openCards[0].innerHTML == openCards[1].innerHTML){
-    //console.log('match');
-    openCards.forEach(function(openCard){
-      openCard.classList.add('match');
-      openCard.classList.remove('open', 'show');
-    })
+function incrementCounter(){
+  movesCounter++;
+  const movesSpan = document.querySelector('.moves');
+  movesSpan.innerText = movesCounter;
+}
 
-    return true;
-  } else {
-    //console.log('no match');
-    setTimeout(function(){
+
+function checkCards() {
+  if(openCards.length === 2){
+    if(openCards[0].innerHTML == openCards[1].innerHTML){
+      console.log('match');
       openCards.forEach(function(openCard){
+        openCard.classList.add('match');
         openCard.classList.remove('open', 'show');
       })
-    }, 1000);
-    return false;
+      openCards = [];
+    } else {
+      deck.style.pointerEvents = "none";
+      console.log('no match');
+      setTimeout(function(){
+        openCards.forEach(function(openCard){
+          openCard.classList.remove('open', 'show');
+          openCards = [];
+          deck.style.pointerEvents = "auto";
+        })
+      }, 1000);
+    }
+    incrementCounter();
+
   }
+  //console.log(openCards);
 }
