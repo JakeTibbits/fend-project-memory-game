@@ -8,6 +8,14 @@ const deck = document.querySelector('.deck');
 //create an empty array to hold all cards
 let cards = [];
 
+// declare counter to keep track of number of moves
+let movesCounter = 0;
+
+//declare array to keep track of open cards
+let openCards = [];
+
+
+
 //populate the array with cards elements
 deck.querySelectorAll('.card').forEach(function(card) {
   cards.push(card);
@@ -39,6 +47,8 @@ function refreshCards(){
 
   //unhide the deck to display shuffled cards
   deck.hidden = false;
+
+  incrementCounter('reset');
 
 }
 
@@ -79,11 +89,7 @@ function shuffle(array) {
 
 
 
-// declare counter to keep track of number of moves
-let movesCounter = 0;
 
-//declare array to keep track of open cards
-let openCards = [];
 
 //declare function to fire when card is clicked
 function clickCard() {
@@ -91,28 +97,16 @@ function clickCard() {
   //flip the clicked card
   flipCard(this);
 
-  const cardCheck = checkCards();
   //check for a match
+  const cardCheck = checkCards();
 
   if(cardCheck == "match"){
-    console.log('match');
-    openCards.forEach(function(openCard){
-      openCard.classList.add('match');
-      openCard.classList.remove('open', 'show');
-    })
-    openCards = [];
+    //console.log('match');
+    matchCards();
   } else if(cardCheck == "noMatch") {
-    deck.style.pointerEvents = "none";
-    console.log('no match');
-    setTimeout(function(){
-      openCards.forEach(function(openCard){
-        openCard.classList.remove('open', 'show');
-        openCards = [];
-        deck.style.pointerEvents = "auto";
-      })
-    }, 1000);
+    //console.log('no match');
+    unFlipCards();
   }
-  //console.log(openCards);
 
 }
 
@@ -123,12 +117,41 @@ function flipCard(card){
 
 }
 
-function incrementCounter(){
+function unFlipCards(){
 
-  movesCounter++;
+  deck.style.pointerEvents = "none";
+  setTimeout(function(){
+    openCards.forEach(function(openCard){
+      openCard.classList.remove('open', 'show');
+      openCards = [];
+      deck.style.pointerEvents = "auto";
+    })
+  }, 1000);
+
+}
+
+function matchCards(){
+
+  openCards.forEach(function(openCard){
+    openCard.classList.add('match');
+    openCard.classList.remove('open', 'show');
+  })
+
+  openCards = [];
+
+}
+
+function incrementCounter(reset){
+
+  if (reset){
+    movesCounter = 0
+  } else {
+    movesCounter++;
+  }
+  //console.log(movesCounter);
   const movesSpan = document.querySelector('.moves');
   movesSpan.innerText = movesCounter;
-  console.log(movesCounter);
+
 
 }
 
