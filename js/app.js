@@ -1,6 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
+//DEFINING VARIABLES
 
 //get the deck
 const deck = document.querySelector('.deck');
@@ -8,28 +6,42 @@ const deck = document.querySelector('.deck');
 //create an empty array to hold all cards
 let cards = [];
 
+//populate the array with cards elements and give each card a click eventListener
+deck.querySelectorAll('.card').forEach(function(card) {
+  cards.push(card);
+  card.addEventListener('click', clickCard);
+});
+
 // declare counter to keep track of number of moves
 let movesCounter = 0;
 
 //declare array to keep track of open cards
 let openCards = [];
 
-
-
-//populate the array with cards elements
-deck.querySelectorAll('.card').forEach(function(card) {
-  cards.push(card);
-  card.addEventListener('click', clickCard);
-});
+//declare array to keep track of matched cards
+let matchedCards = [];
 
 
 
-/*
-* Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method below
-*   - loop through each card and create its HTML
-*   - add each card's HTML to the page
-*/
+
+//SHUFFLING AND DEALING
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+//define function to shuffle and deal the cards
 function refreshCards(){
 
   //hide the deck for to avoid reflows
@@ -43,53 +55,29 @@ function refreshCards(){
   cards.forEach(function(card){
     i++
     card.style.order = i;
+    //reset all cards to initial state
+    card.classList = "card";
   });
 
   //unhide the deck to display shuffled cards
   deck.hidden = false;
 
+  //reset the moveCounter
   incrementCounter('reset');
 
 }
 
-
-//refresh cards every time the page is loaded so that the order is always different
+//refresh cards every time the page is loaded so that the starting order is always different
 document.addEventListener("DOMContentLoaded", refreshCards);
 
 //refresh cards when restart button is clicked
 document.querySelector('.restart').addEventListener('click', refreshCards);
 
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-
-/*
-* set up the event listener for a card. If a card is clicked:
-*  - display the card's symbol (put this functionality in another function that you call from this one)
-*  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-*  - if the list already has another card, check to see if the two cards match
-*    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-*    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-*/
 
 
 
-
+//DEFINING CARD CLICK BEHAVIOURS
 
 //declare function to fire when card is clicked
 function clickCard() {
@@ -101,54 +89,79 @@ function clickCard() {
   const cardCheck = checkCards();
 
   if(cardCheck == "match"){
-    //console.log('match');
     matchCards();
+    //check if all cards are matched
+    if(matchedCards.length == cards.length){
+      //do a win
+      console.log("you win");
+    }
   } else if(cardCheck == "noMatch") {
-    //console.log('no match');
+    //reset unmatched cards
     unFlipCards();
   }
 
 }
 
+
+//function to flip a card on click
 function flipCard(card){
 
+  //add open card styles
   card.classList.add('open', 'show');
+  //add card to openCards array
   openCards.push(card);
 
 }
 
+
+//function to reset cards if no match found
 function unFlipCards(){
 
+  //make other cards unclickable during delay
   deck.style.pointerEvents = "none";
+
+  //add a delay to give people time to memorize the cards
   setTimeout(function(){
     openCards.forEach(function(openCard){
+      //remove open card styles
       openCard.classList.remove('open', 'show');
+      //reset openCards array
       openCards = [];
+      //re-endable clicking
       deck.style.pointerEvents = "auto";
     })
-  }, 1000);
+  }, 1500);
 
 }
 
+//function to set cards to matched state
 function matchCards(){
 
   openCards.forEach(function(openCard){
+    //set matched card class and remove open card classes
     openCard.classList.add('match');
     openCard.classList.remove('open', 'show');
-  })
 
+    //add cards to matchedCards array
+    matchedCards.push(openCard);
+  })
+  //reset openCards array
   openCards = [];
 
 }
 
+//function to increment or reset the movesCounter
 function incrementCounter(reset){
 
+  //check if counter is to be increased or reset
   if (reset){
+    //reset counter
     movesCounter = 0
   } else {
+    //increment counter
     movesCounter++;
   }
-  //console.log(movesCounter);
+  //output new counter value to DOM
   const movesSpan = document.querySelector('.moves');
   movesSpan.innerText = movesCounter;
 
