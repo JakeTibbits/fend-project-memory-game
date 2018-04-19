@@ -79,54 +79,75 @@ function shuffle(array) {
 
 
 
-
+// declare counter to keep track of number of moves
 let movesCounter = 0;
+
+//declare array to keep track of open cards
 let openCards = [];
 
+//declare function to fire when card is clicked
 function clickCard() {
-  if(!(this.classList.contains('open') || this.classList.contains('match'))){
 
-    flipCard(this);
-    checkCards()
-    console.log(openCards);
+  //flip the clicked card
+  flipCard(this);
 
+  const cardCheck = checkCards();
+  //check for a match
+
+  if(cardCheck == "match"){
+    console.log('match');
+    openCards.forEach(function(openCard){
+      openCard.classList.add('match');
+      openCard.classList.remove('open', 'show');
+    })
+    openCards = [];
+  } else if(cardCheck == "noMatch") {
+    deck.style.pointerEvents = "none";
+    console.log('no match');
+    setTimeout(function(){
+      openCards.forEach(function(openCard){
+        openCard.classList.remove('open', 'show');
+        openCards = [];
+        deck.style.pointerEvents = "auto";
+      })
+    }, 1000);
   }
+  //console.log(openCards);
+
 }
 
 function flipCard(card){
+
   card.classList.add('open', 'show');
   openCards.push(card);
+
 }
 
 function incrementCounter(){
+
   movesCounter++;
   const movesSpan = document.querySelector('.moves');
   movesSpan.innerText = movesCounter;
+  console.log(movesCounter);
+
 }
 
 
 function checkCards() {
+
+  //check if two cards are open
   if(openCards.length === 2){
-    if(openCards[0].innerHTML == openCards[1].innerHTML){
-      console.log('match');
-      openCards.forEach(function(openCard){
-        openCard.classList.add('match');
-        openCard.classList.remove('open', 'show');
-      })
-      openCards = [];
-    } else {
-      deck.style.pointerEvents = "none";
-      console.log('no match');
-      setTimeout(function(){
-        openCards.forEach(function(openCard){
-          openCard.classList.remove('open', 'show');
-          openCards = [];
-          deck.style.pointerEvents = "auto";
-        })
-      }, 1000);
-    }
+
+    //increment the move counter
     incrementCounter();
 
+    //check if the open cards match
+    if(openCards[0].innerHTML == openCards[1].innerHTML){
+      return "match";
+    } else {
+      return "noMatch";
+    }
+
   }
-  //console.log(openCards);
+
 }
