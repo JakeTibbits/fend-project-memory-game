@@ -54,8 +54,6 @@ h1 {
   padding: 32px;
   border-radius: 10px;
   border: 1px solid grey;
-  -webkit-box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -126,7 +124,7 @@ h1 {
       -o-transition-delay: 1200ms;
       transition-delay: 1200ms;
       text-align: center; }
-      .deck .card .front .fa {
+      .deck .card .front .card-img {
         position: relative;
         margin-top: 50%;
         top: -24px; }
@@ -299,3 +297,18 @@ h1 {
     border-radius: 8px; }
     .modal-content .restart i {
       margin-right: 10px; }
+
+.deck-selection {
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid grey;
+  margin: 10px auto;
+  padding: 10px 15px; }
+  .deck-selection select {
+    border-radius: 8px;
+    background: transparent;
+    font-weight: bold;
+    border: 1px solid grey;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 5px; }
