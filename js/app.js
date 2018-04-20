@@ -216,8 +216,8 @@ function incrementCounter(reset){
       topStars[0].classList.add('hidden');
       modalStars[0].classList.add('hidden');
     } else if (movesCounter == 36){
-      topStars[1].classList.add('hidden');
-      modalStars[1].classList.add('hidden');
+      topStars[2].classList.add('hidden');
+      modalStars[2].classList.add('hidden');
     }
   }
 
