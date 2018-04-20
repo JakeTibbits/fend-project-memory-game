@@ -21,8 +21,9 @@ let openCards = [];
 //declare array to keep track of matched cards
 let matchedCards = [];
 
+let startingTime = "";
 
-
+const winModal = document.querySelector(".modal");
 
 //SHUFFLING AND DEALING
 
@@ -65,6 +66,9 @@ function refreshCards(){
   //reset the moveCounter
   incrementCounter('reset');
 
+  //if modal is open, hide it
+  winModal.removeAttribute('open');
+
 }
 
 //refresh cards every time the page is loaded so that the starting order is always different
@@ -72,6 +76,8 @@ document.addEventListener("DOMContentLoaded", refreshCards);
 
 //refresh cards when restart button is clicked
 document.querySelector('.restart').addEventListener('click', refreshCards);
+winModal.querySelector('.restart').addEventListener('click', refreshCards);
+winModal.querySelector('.exit').addEventListener('click', refreshCards);
 
 
 
@@ -81,6 +87,10 @@ document.querySelector('.restart').addEventListener('click', refreshCards);
 
 //declare function to fire when card is clicked
 function clickCard() {
+
+  if(movesCounter == 0){
+    startingTime = performance.now();
+  }
 
   //flip the clicked card
   flipCard(this);
@@ -92,14 +102,40 @@ function clickCard() {
     matchCards();
     //check if all cards are matched
     if(matchedCards.length == cards.length){
+      const endingTime = performance.now();
+      const totalTime = endingTime - startingTime;
       //do a win
-      console.log("you win");
+      winGame(totalTime);
+
     }
   } else if(cardCheck == "noMatch") {
     //reset unmatched cards
     unFlipCards();
   }
 
+}
+
+
+//function to trigger win
+function winGame(time){
+
+  const open = document.createAttribute("open");
+  winModal.setAttributeNode(open);
+
+  winModal.querySelector(".timer").innerHTML = timeFormat(time);
+
+}
+
+
+//function to convert milliseconds to readable time
+function timeFormat(time) {
+  var ms = time % 1000;
+  time = (time - ms) / 1000;
+  var secs = time % 60;
+  time = (time - secs) / 60;
+  var mins = time % 60;
+
+  return mins + ' mins ' + secs + ' secs';
 }
 
 
@@ -155,7 +191,8 @@ function incrementCounter(reset){
   //define variables for outputting score to DOM
   const scorePanel = document.querySelector('.score-panel');
   const movesSpan = scorePanel.querySelector('.moves');
-  const allStars = scorePanel.querySelectorAll('.stars li');
+  const topStars = scorePanel.querySelectorAll('.stars li');
+  const modalStars = winModal.querySelectorAll('.stars li');
 
   //hide scorePanel to avoid reflows
   scorePanel.hidden = true;
@@ -165,21 +202,27 @@ function incrementCounter(reset){
     //reset counter
     movesCounter = 0
     //reset stars
-    allStars.forEach(function(star){
+    topStars.forEach(function(star){
+      star.classList= "";
+    });
+    modalStars.forEach(function(star){
       star.classList= "";
     });
   } else {
     //increment counter
-    movesCounter++;
-    if(movesCounter == 12){
-      allStars[0].classList.add('hidden');
-    } else if (movesCounter == 20){
-      allStars[1].classList.add('hidden');
+    movesCounter +=2;
+    console.log(movesCounter);
+    if(movesCounter == 28){
+      topStars[0].classList.add('hidden');
+      modalStars[0].classList.add('hidden');
+    } else if (movesCounter == 36){
+      topStars[1].classList.add('hidden');
+      modalStars[1].classList.add('hidden');
     }
   }
 
   //update moves total
-  movesSpan.innerText = movesCounter;
+  movesSpan.innerText = movesCounter/2;
 
   //unhide scorePanel to after changes made
   scorePanel.hidden = false;

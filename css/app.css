@@ -206,7 +206,12 @@ h1 {
 .stars {
   margin: 0;
   padding: 0;
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   margin: 0 5px 0 0; }
   .stars li {
     list-style: none;
@@ -243,15 +248,30 @@ h1 {
     transform: scale(0); } }
 
 .modal {
-  position: absolute;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: default; }
+
+.modal-content {
+  margin: auto auto;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   border: 1px solid grey;
   text-align: center;
   -webkit-box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 18px 15px 15px rgba(0, 0, 0, 0.2);
-  z-index: 3; }
-  .modal .exit {
+  z-index: 4;
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  margin-left: -150px; }
+  .modal-content .exit {
     position: absolute;
     right: -7px;
     top: -7px;
@@ -266,16 +286,16 @@ h1 {
     border: 1px solid grey;
     padding: 0;
     margin: 0; }
-  .modal h2 {
+  .modal-content h2 {
     font-family: 'Coda', cursive;
     font-size: 28px;
     font-weight: 300; }
-  .modal .stars {
+  .modal-content .stars {
     font-size: 48px;
     color: gold; }
-  .modal .restart {
+  .modal-content .restart {
     font-size: 18px;
     padding: 10px 15px;
     border-radius: 8px; }
-    .modal .restart i {
+    .modal-content .restart i {
       margin-right: 10px; }
