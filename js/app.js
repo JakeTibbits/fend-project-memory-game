@@ -2,6 +2,7 @@
 
 //get the deck
 const deck = document.querySelector('.deck');
+const deckPicker = document.getElementById('deckPicker');
 
 //create an empty array to hold all cards
 let cards = [];
@@ -47,6 +48,8 @@ function refreshCards(){
 
   //hide the deck for to avoid reflows
   deck.hidden = true;
+
+  setDeck();
 
   //shuffle
   cards = shuffle(cards);
@@ -247,4 +250,13 @@ function checkCards() {
 
   }
 
+}
+
+deckPicker.addEventListener('change', setDeck);
+
+function setDeck(){
+  const chosenDeck = deckPicker.options[deckPicker.selectedIndex].value;
+
+  document.querySelector('body').style.backgroundImage = "url('img/"+chosenDeck+"/bg.jpg')";
+  deck.classList = "deck "+chosenDeck;
 }
