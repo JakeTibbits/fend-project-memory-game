@@ -205,7 +205,7 @@ h1 {
  */
 .score-panel {
   text-align: left;
-  width: 345px;
+  width: auto;
   margin-bottom: 10px;
   font-size: 28px;
   display: -webkit-box;
@@ -223,6 +223,18 @@ h1 {
   position: relative;
   top: 1px;
   z-index: 2;
+}
+
+.score-panel .move-counter, .score-panel .time, .score-panel .restart {
+  margin-left: 20px;
+}
+
+.score-panel .time {
+  min-width: 210px;
+}
+
+.score-panel .move-counter {
+  min-width: 120px;
 }
 
 .restart {

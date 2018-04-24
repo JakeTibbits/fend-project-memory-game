@@ -130,7 +130,7 @@ h1
 
 .score-panel
   text-align: left
-  width: 345px
+  width: auto
   margin-bottom: 10px
   font-size: 28px
   display: flex
@@ -144,6 +144,12 @@ h1
   position: relative
   top: 1px
   z-index: 2
+  .move-counter, .time, .restart
+    margin-left: 20px
+  .time
+    min-width: 210px
+  .move-counter
+    min-width: 120px
 
 .restart
   cursor: pointer
