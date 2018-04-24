@@ -69,6 +69,9 @@ function refreshCards(){
   //reset the moveCounter
   incrementCounter('reset');
 
+  //close any open cards
+  openCards = []
+
   //if modal is open, hide it
   winModal.removeAttribute('open');
 
@@ -214,7 +217,7 @@ function incrementCounter(reset){
   } else {
     //increment counter
     movesCounter +=2;
-    console.log(movesCounter);
+    //console.log(movesCounter);
     if(movesCounter == 28){
       topStars[0].classList.add('hidden');
       modalStars[0].classList.add('hidden');
@@ -242,7 +245,7 @@ function checkCards() {
     incrementCounter();
 
     //check if the open cards match
-    if(openCards[0].innerHTML == openCards[1].innerHTML){
+    if(openCards[0].getAttribute("pair") == openCards[1].getAttribute("pair")){
       return "match";
     } else {
       return "noMatch";
@@ -252,11 +255,27 @@ function checkCards() {
 
 }
 
-deckPicker.addEventListener('change', setDeck);
+//add listener to trigger event when a different deck is chosen
+deckPicker.addEventListener('change', refreshCards);
 
 function setDeck(){
+  //find out which deck was chosen
   const chosenDeck = deckPicker.options[deckPicker.selectedIndex].value;
-
+  //change the background image to match the new deck
   document.querySelector('body').style.backgroundImage = "url('img/"+chosenDeck+"/bg.jpg')";
+  //give the deck a class to contain any styles for the chosen deck
   deck.classList = "deck "+chosenDeck;
+
+  //loop through cards
+  cards.forEach(function(card){
+    //find out which pair the card belongs to
+    const letter = card.getAttribute("pair")
+    //give the card the appropriate styling for the deck and pair
+    card.querySelector(".back").style.backgroundImage = "url(img/"+chosenDeck+"/reverse.svg)";
+    card.querySelector(".front").classList = "front "+chosenDeck;
+    card.querySelector(".front").style.backgroundImage = "url(img/"+chosenDeck+"/"+letter+".svg)";
+
+  });
+
+
 }
