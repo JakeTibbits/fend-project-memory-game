@@ -22,7 +22,9 @@ let openCards = [];
 //declare array to keep track of matched cards
 let matchedCards = [];
 
-let startingTime = "";
+let timer = null;
+let counter = 0;
+const timerDisplay = document.querySelector(".time")
 
 const winModal = document.querySelector(".modal");
 
@@ -95,7 +97,8 @@ winModal.querySelector('.exit').addEventListener('click', refreshCards);
 function clickCard() {
 
   if(movesCounter == 0){
-    startingTime = performance.now();
+    //startingTime = performance.now();
+    startTimer();
   }
 
   //flip the clicked card
@@ -108,10 +111,8 @@ function clickCard() {
     matchCards();
     //check if all cards are matched
     if(matchedCards.length == cards.length){
-      const endingTime = performance.now();
-      const totalTime = endingTime - startingTime;
       //do a win
-      winGame(totalTime);
+      winGame();
 
     }
   } else if(cardCheck == "noMatch") {
@@ -127,9 +128,27 @@ function winGame(time){
 
   const open = document.createAttribute("open");
   winModal.setAttributeNode(open);
+  clearInterval(timer);
+  time = timeFormat(counter * 1000);
+  timerDisplay.innerText = time;
 
-  winModal.querySelector(".timer").innerHTML = timeFormat(time);
+  winModal.querySelector(".timer").innerText = time
 
+}
+
+
+
+
+function startTimer() {
+  timer = setInterval(function(){
+    incrementTime();
+  },1000);
+}
+
+function incrementTime(){
+  counter++;
+  time = timeFormat(counter * 1000);
+  timerDisplay.innerText = time;
 }
 
 
@@ -216,19 +235,21 @@ function incrementCounter(reset){
     });
   } else {
     //increment counter
-    movesCounter +=2;
+    movesCounter +=0.5;
     //console.log(movesCounter);
-    if(movesCounter == 28){
+    if(movesCounter == 14){
       topStars[0].classList.add('hidden');
       modalStars[0].classList.add('hidden');
-    } else if (movesCounter == 36){
+    } else if (movesCounter == 20){
       topStars[2].classList.add('hidden');
       modalStars[2].classList.add('hidden');
     }
   }
 
-  //update moves total
-  movesSpan.innerText = movesCounter/2;
+  if(openCards.length === 2){
+    //update moves total
+    movesSpan.innerText = movesCounter;
+  }
 
   //unhide scorePanel to after changes made
   scorePanel.hidden = false;
@@ -237,12 +258,12 @@ function incrementCounter(reset){
 
 
 function checkCards() {
+  //increment the move counter
+  incrementCounter();
 
   //check if two cards are open
   if(openCards.length === 2){
 
-    //increment the move counter
-    incrementCounter();
 
     //check if the open cards match
     if(openCards[0].getAttribute("pair") == openCards[1].getAttribute("pair")){
