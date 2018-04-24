@@ -1,25 +1,28 @@
 html {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 *,
 *::before,
 *::after {
   -webkit-box-sizing: inherit;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 html,
 body {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 body {
-  background-image: url("../img/sky-clouds-moon-horizon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: 'Coda', cursive; }
+  font-family: 'Coda', cursive;
+}
 
 .container {
   display: -webkit-box;
@@ -34,7 +37,8 @@ body {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+}
 
 h1 {
   font-family: 'Coda', cursive;
@@ -42,7 +46,8 @@ h1 {
   font-size: 28px;
   padding: 10px 15px;
   background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 8px; }
+  border-radius: 8px;
+}
 
 /*
  * Styles for the deck of cards
@@ -68,105 +73,132 @@ h1 {
   margin: 0 0 3em;
   -webkit-perspective: 1000px;
   perspective: 1000px;
-  z-index: 1; }
-  .deck .card {
-    height: 125px;
-    width: 125px;
-    font-size: 48px;
-    color: #ffffff;
-    cursor: pointer;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    border-radius: 8px;
-    -webkit-box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    -webkit-transition: -webkit-transform 500ms ease-in-out;
-    transition: -webkit-transform 500ms ease-in-out;
-    -o-transition: transform 500ms ease-in-out;
-    transition: transform 500ms ease-in-out;
-    transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    position: relative; }
-    .deck .card.open {
-      -webkit-transform: rotateY(0);
-      transform: rotateY(0);
-      cursor: default;
-      pointer-events: none; }
-    .deck .card .front,
-    .deck .card .back {
-      border-radius: 8px;
-      width: 100%;
-      height: 100%;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      position: absolute;
-      top: 0;
-      left: 0; }
-    .deck .card .front {
-      z-index: 2;
-      background: #02b3e4;
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-      -webkit-transition: background-color 300ms ease-in-out;
-      -o-transition: background-color 300ms ease-in-out;
-      transition: background-color 300ms ease-in-out;
-      -webkit-transition-delay: 1200ms;
-      -o-transition-delay: 1200ms;
-      transition-delay: 1200ms;
-      text-align: center; }
-      .deck .card .front .card-img {
-        position: relative;
-        margin-top: 50%;
-        top: -24px; }
-    .deck .card .back {
-      background: #2e3d49;
-      -webkit-transform: rotateY(180deg);
-      transform: rotateY(180deg); }
-    .deck .card.match {
-      -webkit-transform: rotateY(0);
-      transform: rotateY(0);
-      cursor: default;
-      pointer-events: none;
-      -webkit-animation: match 800ms cubic-bezier(0.52, 0.09, 0.53, 1.51);
-      animation: match 800ms cubic-bezier(0.52, 0.09, 0.53, 1.51);
-      -webkit-animation-fill-mode: forwards;
-      animation-fill-mode: forwards;
-      -webkit-animation-delay: 500ms;
-      animation-delay: 500ms; }
-      .deck .card.match .front {
-        background-color: gold; }
+  z-index: 1;
+}
+
+.deck .card {
+  height: 125px;
+  width: 125px;
+  font-size: 0;
+  color: #ffffff;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 8px;
+  -webkit-box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+  -webkit-transition: -webkit-transform 500ms ease-in-out;
+  transition: -webkit-transform 500ms ease-in-out;
+  -o-transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out;
+  transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.deck .card.open {
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+  cursor: default;
+  pointer-events: none;
+}
+
+.deck .card .front,
+.deck .card .back {
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.deck .card .front {
+  z-index: 2;
+  background-size: cover;
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transition: background-color 300ms ease-in-out;
+  -o-transition: background-color 300ms ease-in-out;
+  transition: background-color 300ms ease-in-out;
+  -webkit-transition-delay: 1200ms;
+  -o-transition-delay: 1200ms;
+  transition-delay: 1200ms;
+  text-align: center;
+}
+
+.deck .card .front.fa {
+  padding-top: 20%;
+  font-size: 60px;
+  background-color: #0ae2ce;
+  background-image: none !important;
+}
+
+.deck .card .back {
+  background-color: #2e3d49;
+  background-size: cover;
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.deck .card.match {
+  -webkit-transform: rotateY(0);
+  transform: rotateY(0);
+  cursor: default;
+  pointer-events: none;
+  -webkit-animation: match 800ms cubic-bezier(0.52, 0.09, 0.53, 1.51);
+  animation: match 800ms cubic-bezier(0.52, 0.09, 0.53, 1.51);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 500ms;
+  animation-delay: 500ms;
+}
+
+.deck .card.match .front {
+  background-color: gold;
+}
 
 @-webkit-keyframes match {
   0% {
     -webkit-transform: scale(1);
-    transform: scale(1); }
+    transform: scale(1);
+  }
   50% {
     -webkit-transform: scale(1.1);
-    transform: scale(1.1); }
+    transform: scale(1.1);
+  }
   100% {
     -webkit-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1);
+  }
+}
 
 @keyframes match {
   0% {
     -webkit-transform: scale(1);
-    transform: scale(1); }
+    transform: scale(1);
+  }
   50% {
     -webkit-transform: scale(1.1);
-    transform: scale(1.1); }
+    transform: scale(1.1);
+  }
   100% {
     -webkit-transform: scale(1);
-    transform: scale(1); } }
+    transform: scale(1);
+  }
+}
 
 /*
  * Styles for the Score Panel
@@ -190,7 +222,8 @@ h1 {
   margin-bottom: 0;
   position: relative;
   top: 1px;
-  z-index: 2; }
+  z-index: 2;
+}
 
 .restart {
   cursor: pointer;
@@ -199,7 +232,8 @@ h1 {
   appearance: none;
   background-color: transparent;
   border: 0;
-  font-size: 28px; }
+  font-size: 28px;
+}
 
 .stars {
   margin: 0;
@@ -210,40 +244,53 @@ h1 {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin: 0 5px 0 0; }
-  .stars li {
-    list-style: none;
-    display: inline-block; }
-    .stars li.hidden {
-      will-change: transform opacity;
-      -webkit-animation: popOut 500ms ease-in-out;
-      animation: popOut 500ms ease-in-out;
-      -webkit-animation-fill-mode: forwards;
-      animation-fill-mode: forwards; }
+  margin: 0 5px 0 0;
+}
+
+.stars li {
+  list-style: none;
+  display: inline-block;
+}
+
+.stars li.hidden {
+  will-change: transform opacity;
+  -webkit-animation: popOut 500ms ease-in-out;
+  animation: popOut 500ms ease-in-out;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
 
 @-webkit-keyframes popOut {
   20% {
     opacity: 1;
     -webkit-transform: scale(1.2);
-    transform: scale(1.2); }
+    transform: scale(1.2);
+  }
   50% {
-    opacity: 1; }
+    opacity: 1;
+  }
   100% {
     opacity: 0;
     -webkit-transform: scale(0);
-    transform: scale(0); } }
+    transform: scale(0);
+  }
+}
 
 @keyframes popOut {
   20% {
     opacity: 1;
     -webkit-transform: scale(1.2);
-    transform: scale(1.2); }
+    transform: scale(1.2);
+  }
   50% {
-    opacity: 1; }
+    opacity: 1;
+  }
   100% {
     opacity: 0;
     -webkit-transform: scale(0);
-    transform: scale(0); } }
+    transform: scale(0);
+  }
+}
 
 .modal {
   position: fixed;
@@ -253,7 +300,8 @@ h1 {
   left: 0;
   z-index: 3;
   background-color: rgba(0, 0, 0, 0.3);
-  cursor: default; }
+  cursor: default;
+}
 
 .modal-content {
   margin: auto auto;
@@ -268,47 +316,61 @@ h1 {
   position: fixed;
   top: 150px;
   left: 50%;
-  margin-left: -150px; }
-  .modal-content .exit {
-    position: absolute;
-    right: -7px;
-    top: -7px;
-    border-radius: 8px;
-    background-color: #f00;
-    font-size: 28px;
-    color: #fff;
-    width: 32px;
-    height: 32px;
-    text-align: center;
-    line-height: 20px;
-    border: 1px solid grey;
-    padding: 0;
-    margin: 0; }
-  .modal-content h2 {
-    font-family: 'Coda', cursive;
-    font-size: 28px;
-    font-weight: 300; }
-  .modal-content .stars {
-    font-size: 48px;
-    color: gold; }
-  .modal-content .restart {
-    font-size: 18px;
-    padding: 10px 15px;
-    border-radius: 8px; }
-    .modal-content .restart i {
-      margin-right: 10px; }
+  margin-left: -150px;
+}
+
+.modal-content .exit {
+  position: absolute;
+  right: -7px;
+  top: -7px;
+  border-radius: 8px;
+  background-color: #f00;
+  font-size: 28px;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  line-height: 20px;
+  border: 1px solid grey;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-content h2 {
+  font-family: 'Coda', cursive;
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.modal-content .stars {
+  font-size: 48px;
+  color: gold;
+}
+
+.modal-content .restart {
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.modal-content .restart i {
+  margin-right: 10px;
+}
 
 .deck-selection {
   border-radius: 8px;
   background-color: rgba(255, 255, 255, 0.6);
   border: 1px solid grey;
   margin: 10px auto;
-  padding: 10px 15px; }
-  .deck-selection select {
-    border-radius: 8px;
-    background: transparent;
-    font-weight: bold;
-    border: 1px solid grey;
-    cursor: pointer;
-    padding: 5px;
-    margin-left: 5px; }
+  padding: 10px 15px;
+}
+
+.deck-selection select {
+  border-radius: 8px;
+  background: transparent;
+  font-weight: bold;
+  border: 1px solid grey;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 5px;
+}

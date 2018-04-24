@@ -18,7 +18,7 @@ body
 
 body
   background:
-    image: url('../img/sky-clouds-moon-horizon.jpg')
+    //image: url('../img/sky-clouds-moon-horizon.jpg')
     repeat: no-repeat
     size: cover
   font-family: 'Coda', cursive
@@ -63,7 +63,7 @@ h1
   .card
     height: 125px
     width: 125px
-    font-size: 48px
+    font-size: 0
     color: #ffffff
     cursor: pointer
     display: flex
@@ -90,17 +90,21 @@ h1
       left: 0
     .front
       z-index: 2
-      background: #02b3e4
+      background:
+        size: cover
       transform: rotateY(0deg)
       transition: background-color 300ms ease-in-out
       transition-delay: 1200ms
       text-align: center
-      .card-img
-        position: relative
-        margin-top: 50%
-        top: -24px
+      &.fa
+        padding-top: 20%
+        font-size: 60px
+        background-color: #0ae2ce
+        background-image: none !important
     .back
-      background: #2e3d49
+      background:
+        color: #2e3d49
+        size: cover
       transform: rotateY(180deg)
     &.match
       transform: rotateY(0)
@@ -111,6 +115,7 @@ h1
       animation-delay: 500ms
       .front
         background-color: gold
+
 
 @keyframes match
   0%
