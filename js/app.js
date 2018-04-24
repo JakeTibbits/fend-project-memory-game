@@ -152,7 +152,7 @@ function incrementTime(){
 }
 
 
-//function to convert milliseconds to readable time
+//function to convert milliseconds to readable time - found at https://stackoverflow.com/questions/9763441/milliseconds-to-time-in-javascript?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 function timeFormat(time) {
   var ms = time % 1000;
   time = (time - ms) / 1000;
