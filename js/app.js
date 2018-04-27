@@ -72,7 +72,13 @@ function refreshCards(){
   incrementCounter('reset');
 
   //close any open cards
-  openCards = []
+  openCards = [];
+
+
+  counter = 0;
+  endGame(0, false);
+
+
 
   //if modal is open, hide it
   winModal.removeAttribute('open');
@@ -112,7 +118,7 @@ function clickCard() {
     //check if all cards are matched
     if(matchedCards.length == cards.length){
       //do a win
-      winGame();
+      endGame(time, true);
 
     }
   } else if(cardCheck == "noMatch") {
@@ -124,12 +130,18 @@ function clickCard() {
 
 
 //function to trigger win
-function winGame(time){
+function endGame(time, win){
 
-  const open = document.createAttribute("open");
-  winModal.setAttributeNode(open);
-  clearInterval(timer);
-  time = timeFormat(counter * 1000);
+  if(win){
+    const open = document.createAttribute("open");
+    winModal.setAttributeNode(open);
+    clearInterval(timer);
+    time = timeFormat(counter * 1000);
+  } else {
+    clearInterval(timer);
+    time = timeFormat(counter * 1000);
+  }
+
   timerDisplay.innerText = time;
 
   winModal.querySelector(".timer").innerText = time
@@ -233,6 +245,7 @@ function incrementCounter(reset){
     modalStars.forEach(function(star){
       star.classList= "";
     });
+    movesSpan.innerText = movesCounter;
   } else {
     //increment counter
     movesCounter +=0.5;
