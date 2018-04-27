@@ -47,21 +47,35 @@ h1 {
   padding: 10px 15px;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
+  text-align: center;
+}
+
+@media screen and (max-width: 625px) {
+  h1 {
+    font-size: 24px;
+    max-width: 90vw;
+  }
 }
 
 /*
  * Styles for the deck of cards
  */
 .deck {
-  width: 660px;
-  min-height: 680px;
+  width: 90vw;
+  height: 90vw;
+  max-width: 600px;
+  max-height: 600px;
   background: rgba(255, 255, 255, 0.6);
-  padding: 32px;
+  padding: 20px;
   border-radius: 10px;
   border: 1px solid grey;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   -webkit-box-pack: justify;
@@ -77,8 +91,8 @@ h1 {
 }
 
 .deck .card {
-  height: 125px;
-  width: 125px;
+  width: 22%;
+  height: 22%;
   font-size: 0;
   color: #ffffff;
   cursor: pointer;
@@ -237,6 +251,27 @@ h1 {
   min-width: 120px;
 }
 
+@media screen and (max-width: 625px) {
+  .score-panel {
+    font-size: 24px;
+    max-width: 85vw;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+  .score-panel .move-counter, .score-panel .time, .score-panel .restart {
+    margin-left: 10px;
+  }
+  .score-panel .time {
+    min-width: 0;
+  }
+  .score-panel .move-counter {
+    min-width: 0;
+  }
+}
+
 .restart {
   cursor: pointer;
   -webkit-appearance: none;
@@ -375,6 +410,15 @@ h1 {
   border: 1px solid grey;
   margin: 10px auto;
   padding: 10px 15px;
+  max-width: 85vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .deck-selection select {
