@@ -282,7 +282,7 @@ function checkCards() {
 
 
     //check if the open cards match
-    if(openCards[0].getAttribute("pair") == openCards[1].getAttribute("pair")){
+    if(openCards[0].getAttribute("data-pair") == openCards[1].getAttribute("data-pair")){
       return "match";
     } else {
       return "noMatch";
@@ -305,9 +305,9 @@ function setDeck(){
 
   //loop through cards
   cards.forEach(function(card){
-    //find out which pair the card belongs to
-    const letter = card.getAttribute("pair");
-    //give the card the appropriate styling for the deck and pair
+    //find out which data-pair the card belongs to
+    const letter = card.getAttribute("data-pair");
+    //give the card the appropriate styling for the deck and data-pair
     card.querySelector(".back").style.backgroundImage = "url(img/"+chosenDeck+"/reverse.svg)";
     card.querySelector(".front").classList = "front "+chosenDeck;
     card.querySelector(".front").style.backgroundImage = "url(img/"+chosenDeck+"/"+letter+".svg)";
