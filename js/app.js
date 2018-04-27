@@ -1,3 +1,6 @@
+/*jshint esversion: 6 */
+
+
 //DEFINING VARIABLES
 
 //get the deck
@@ -23,8 +26,9 @@ let openCards = [];
 let matchedCards = [];
 
 let timer = null;
+let time;
 let counter = 0;
-const timerDisplay = document.querySelector(".time")
+const timerDisplay = document.querySelector(".time");
 
 const winModal = document.querySelector(".modal");
 
@@ -59,7 +63,7 @@ function refreshCards(){
   //re-order the cards using flex order
   let i = 0;
   cards.forEach(function(card){
-    i++
+    i++;
     card.style.order = i;
     //reset all cards to initial state
     card.classList = "card";
@@ -102,7 +106,7 @@ winModal.querySelector('.exit').addEventListener('click', refreshCards);
 //declare function to fire when card is clicked
 function clickCard() {
 
-  if(movesCounter == 0){
+  if(movesCounter === 0){
     //startingTime = performance.now();
     startTimer();
   }
@@ -119,7 +123,6 @@ function clickCard() {
     if(matchedCards.length == cards.length){
       //do a win
       endGame(time, true);
-
     }
   } else if(cardCheck == "noMatch") {
     //reset unmatched cards
@@ -144,7 +147,7 @@ function endGame(time, win){
 
   timerDisplay.innerText = time;
 
-  winModal.querySelector(".timer").innerText = time
+  winModal.querySelector(".timer").innerText = time;
 
 }
 
@@ -202,7 +205,7 @@ function unFlipCards(){
       openCards = [];
       //re-endable clicking
       deck.style.pointerEvents = "auto";
-    })
+    });
   }, 1200);
 
 }
@@ -217,7 +220,7 @@ function matchCards(){
 
     //add cards to matchedCards array
     matchedCards.push(openCard);
-  })
+  });
   //reset openCards array
   openCards = [];
 
@@ -237,7 +240,7 @@ function incrementCounter(reset){
   //check if counter is to be increased or reset
   if (reset){
     //reset counter
-    movesCounter = 0
+    movesCounter = 0;
     //reset stars
     topStars.forEach(function(star){
       star.classList= "";
@@ -303,7 +306,7 @@ function setDeck(){
   //loop through cards
   cards.forEach(function(card){
     //find out which pair the card belongs to
-    const letter = card.getAttribute("pair")
+    const letter = card.getAttribute("pair");
     //give the card the appropriate styling for the deck and pair
     card.querySelector(".back").style.backgroundImage = "url(img/"+chosenDeck+"/reverse.svg)";
     card.querySelector(".front").classList = "front "+chosenDeck;
