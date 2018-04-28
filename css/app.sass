@@ -219,6 +219,7 @@ h1
     transform: scale(0)
 
 .modal
+  display: none
   position: fixed
   width: 100vw
   height: 100vh
@@ -227,6 +228,8 @@ h1
   z-index: 3
   background-color: rgba(0,0,0,0.3)
   cursor: default
+  &[open]
+    display: block
 
 .modal-content
   margin: auto auto
